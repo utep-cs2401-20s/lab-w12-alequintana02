@@ -44,10 +44,9 @@ public class myBinarySearchTreeNode {
       }
     }//closes other big if
     else if (inValue == myValue) {//we cannot have node duplicates
-      System.out.print("ERROR: No duplicate values allowed!");
+      System.out.println("ERROR: No duplicate values allowed!");
     }
   } //closes insert method
-
 
   public int height() {
     // This method recursively calculates the height of the entire (sub)tree.
@@ -67,17 +66,12 @@ public class myBinarySearchTreeNode {
     }
   }
 
-  //  return -1;? what's this for?
-
   public int depth(int search) {
     // This method recursively calculates the depth of a given search value.
     // If the given value is not in the tree, this method returns -1.
     // Note that if the tree is a proper BST, this method should complete in O(log n) time.
     // Additionally, remember that the depth is the number of nodes on the path from a node to the root
     // (i.e. the number of the recursive calls).
-    if (search == myValue) {
-      return 0;
-    }
     if (search < myValue) {
       if (left != null) {
         return left.depth(search) + 1;
@@ -88,9 +82,11 @@ public class myBinarySearchTreeNode {
         return right.depth(search) + 1;
       }
     }
+    if (search == myValue) {
+      return 0;
+    }
       return -1; // given value is not in the tree
     }
-
 
   public int size(){
 // This method recursively calculates the number of nodes in the (sub)tree.
@@ -103,15 +99,35 @@ public class myBinarySearchTreeNode {
     return sum; //base case
   }
 
-  
   // Utility function included so you can debug your solution. 
-  public void print() { print(""); }
+  /*public void print() { print(""); }
   private void print(String prefix) {
     System.out.println(prefix + myValue);
     prefix = prefix.replace('\u251C', '\u2502');
     prefix = prefix.replace('\u2514', ' ');
     if(left != null) left.print(prefix + "\u251C ");
     if(right != null) right.print(prefix + "\u2514 ");
+  }*/
+
+  //I was having a hard time interpreting if my tree was building correctly (everything looked like it was being added to the left)
+  //I asked Antoine if it was an IntelliJ issue or if my code was incorrect. He provided this print method for testing purposes
+  public void print2() {
+    System.out.println("==========");
+    System.out.println("Root: " + myValue);
+
+    if(left != null)
+      System.out.println("Left: " + left.myValue);
+    else
+      System.out.println("Left: none");
+
+    if(right != null)
+      System.out.println("Right: " + right.myValue);
+    else
+      System.out.println("Right: none");
+
+    if(left != null)
+      left.print2();
+    if(right != null)
+      right.print2();
   }
-  
 } 
